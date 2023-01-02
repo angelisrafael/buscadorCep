@@ -78,7 +78,7 @@ class _HomePageState extends State<HomePage> {
                     Visibility(
                         visible: enderecoModel != null,
                         child: Text(
-                            '${enderecoModel?.bairro} ${enderecoModel?.logradouro} ${enderecoModel?.complemento} ${enderecoModel?.cep}'))
+                            'Bairro: ${enderecoModel?.bairro}\n Rua: ${enderecoModel?.logradouro}\n Complemento: ${enderecoModel?.complemento}\n CEP: ${enderecoModel?.cep}'))
                   ],
                 ))));
   }
