@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:gap/gap.dart';
 import '../models/endereco_model.dart';
 import '../repositories/cep_repository.dart';
 import '../repositories/cep_repository_impl.dart';
@@ -27,15 +29,30 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: const Text('Buscar CEP'),
-        ),
         body: SingleChildScrollView(
+          padding: EdgeInsets.symmetric(horizontal: 40),
             child: Form(
                 key: formKey,
                 child: Column(
                   children: [
+                    const Gap(80),
+                    Container(
+                      height: 130,
+                      width: 130,
+                      decoration: const BoxDecoration(
+                        image: DecorationImage(fit: BoxFit.fitHeight,
+                          image: AssetImage("assets/images/cep_img.png"))
+                      ),
+                    ),
+                    const Gap(50),
                     TextFormField(
+                      keyboardType: TextInputType.number,
+                      inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                      style: const TextStyle(fontSize: 18),
+                      decoration: const InputDecoration(
+                        labelText: 'Digite um CEP',
+                        border: OutlineInputBorder()
+                      ),
                       controller: cepEC,
                       validator: (value) {
                         if (value == null || value.isEmpty) {
@@ -44,6 +61,7 @@ class _HomePageState extends State<HomePage> {
                         return null;
                       },
                     ),
+                    const Gap(30),
                     ElevatedButton(
                         onPressed: () async {
                           final valid =
@@ -75,6 +93,7 @@ class _HomePageState extends State<HomePage> {
                     Visibility(
                         visible: loading,
                         child: const CircularProgressIndicator()),
+                    const Gap(30),
                     Visibility(
                         visible: enderecoModel != null,
                         child: Text(
